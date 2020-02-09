@@ -46,6 +46,7 @@ module mk_elliptic_fourier(M: real): (
     in tabulate K go
 
   let extract_coeff [K] (xs: [K]point)(n) =
+    let two = M.from_fraction 2 1
     let delta_x = delta_poly (map (\p -> p.x) xs)
     let delta_y = delta_poly (map (\p -> p.y) xs)
     let delta_t = map2 (\x y -> M.sqrt (x M.* x M.+ y M.* y)) delta_x delta_y
