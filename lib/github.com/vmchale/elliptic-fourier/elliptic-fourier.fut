@@ -76,8 +76,10 @@ module mk_elliptic_fourier(M: real): (
     let mk_t_cos = mk_t M.cos
     let mk_t_sin = mk_t M.sin
 
+    let mk_a (n) = outer_coeff(n)
+
     in
-    tabulate N (\_ -> {a = M.from_fraction 0 1, b = M.from_fraction 0 1, c = M.from_fraction 0 1, d = M.from_fraction 0 1})
+    tabulate N (\n -> {a = mk_a(n), b = M.from_fraction 0 1, c = M.from_fraction 0 1, d = M.from_fraction 0 1})
 
   let center_point(xs) =
     {x = M.from_fraction 0 1, y = M.from_fraction 0 1}
