@@ -1,0 +1,1 @@
+- [ ] J implementation to compare? Make sure it's performant & all.
