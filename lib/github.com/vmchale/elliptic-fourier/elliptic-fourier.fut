@@ -60,11 +60,21 @@ module mk_elliptic_fourier(M: real): (
     let delta_t = map2 (\x y -> M.sqrt (x M.* x M.+ y M.* y)) delta_x delta_y
     let ts = scan (M.+) (M.from_fraction 0 1) delta_t
     let T = M.sum ts
+
     let outer_coeff(n) =
       let n_f = M.from_fraction n 1
       in
 
       T M./ (two M.* n_f M.* n_f M.* M.pi M.* M.pi)
+
+    let mk_t (f)(n)(t) =
+      let n_f = M.from_fraction n 1
+      in
+
+      f (two M.* n_f M.* M.pi M.* t M./ T)
+
+    let mk_t_cos = mk_t M.cos
+    let mk_t_sin = mk_t M.sin
 
     in
     tabulate N (\_ -> {a = M.from_fraction 0 1, b = M.from_fraction 0 1, c = M.from_fraction 0 1, d = M.from_fraction 0 1})
