@@ -76,10 +76,42 @@ module mk_elliptic_fourier(M: real): (
     let mk_t_cos = mk_t M.cos
     let mk_t_sin = mk_t M.sin
 
-    let mk_a (n) = outer_coeff(n)
+    let delta_x_over_delta_t: [K]M.t =
+      map2 (M./) delta_x delta_t
+
+    let delta_y_over_delta_t: [K]M.t =
+      map2 (M./) delta_y delta_t
+
+    let cos_diffs (n: i32): []M.t =
+      tabulate (K-1)
+        (\p ->
+          mk_t_cos n ts[p+1] M.- mk_t_cos n ts[p])
+
+    -- FIXME: is indexing starting the same here as for delta_x_over_delta_t?
+    let sin_diffs (n: i32): []M.t =
+      tabulate (K-1)
+        (\p ->
+          mk_t_sin n ts[p+1] M.- mk_t_cos n ts[p])
+
+    let mk_a (n) =
+      outer_coeff(n) M.*
+        M.sum (delta_x_over_delta_t)
+
+    let mk_b (n) =
+      outer_coeff(n) M.*
+        M.sum (delta_x_over_delta_t)
+
+    let mk_c (n) =
+      outer_coeff(n) M.*
+        M.sum (delta_y_over_delta_t)
+
+    let mk_d (n) =
+      outer_coeff(n) M.*
+        M.sum (delta_y_over_delta_t)
 
     in
-    tabulate N (\n -> {a = mk_a(n), b = M.from_fraction 0 1, c = M.from_fraction 0 1, d = M.from_fraction 0 1})
+    tabulate N (\n ->
+      {a = mk_a(n), b = mk_b(n), c = mk_c(n), d = mk_d(n)})
 
   let center_point(xs) =
     {x = M.from_fraction 0 1, y = M.from_fraction 0 1}
