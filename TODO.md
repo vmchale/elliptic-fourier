@@ -1,1 +1,3 @@
 - [ ] J implementation to compare? Make sure it's performant & all.
+- [ ] See if we can "learn" on the coefficients? faster? easy (?) models?
+- [ ] Plot it
