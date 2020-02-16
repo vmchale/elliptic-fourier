@@ -22,4 +22,3 @@ xs_pythagorean_triangle =: 0 4 4
 ys_pythagorean_triangle =: 0 0 3
 
 NB. $ 1 2 3  ---> 3 # 1 2 3 ---> 3
-NB. dependemt types
