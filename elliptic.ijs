@@ -34,12 +34,16 @@ coeff =: 4 : 0
     cos_diffs =. u sap ts
     sin_diffs =. v sap ts
     dxs =. delta_xs % delta_ts
-    dys =. delta_ys % delta_ts 
-    a_n_sum =. +/ dxs * cos_diffs
-    b_n_sum =. +/ dxs * sin_diffs 
-    c_n_sum =. +/ dys * cos_diffs
-    d_n_sum =. +/ dys * sin_diffs
-    outer_coeff * (a_n_sum , b_n_sum , c_n_sum , ,: d_n_sum)
+    dys =. delta_ys % delta_ts
+    coalesce =. (outer_coeff & *) @: +/
+    a_n_sum =. coalesce dxs * cos_diffs
+    b_n_sum =. coalesce dxs * sin_diffs
+    c_n_sum =. coalesce dys * cos_diffs
+    d_n_sum =. coalesce dys * sin_diffs
+    NB. I feel like there's a better way to do this
+    NB. also maybe boxed return?
+    (a_n_sum , b_n_sum , c_n_sum , ,: d_n_sum)
+    NB. < " 1
 )
 
 NB. first n coefficients (in a 4x_ array)
