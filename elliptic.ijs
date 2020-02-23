@@ -27,24 +27,28 @@ coeff =: 4 : 0
     'xs ys' =. x
     n =: y
     K =. # xs
-    ts =. (0 , xs , {. xs) t (0, ys, {. ys) 
+    ts =. (0 , xs , {. xs) t (0, ys, {. ys)
     NB. tie at both (so we have t0 and tK equally
     T =: {: ts
     outer_coeff =. T % (2 * (*: n) * (*: pi))
     delta_xs =. succ_diff tie_self xs
     delta_ys =. succ_diff tie_self ys
     delta_ts =. delta_xs dist delta_ys
+
     u =. 4 : 'cos (2 * n * pi * x % T) - cos (2 * n * pi * y % T)'
     v =. 4 : 'sin (2 * n * pi * x % T) - sin (2 * n * pi * y % T)'
+
     cos_diffs =. u sap ts
     sin_diffs =. v sap ts
     dxs =. delta_xs % delta_ts
     dys =. delta_ys % delta_ts
     coalesce =. (outer_coeff & *) @: +/
+
     a_n_sum =. coalesce dxs * cos_diffs
     b_n_sum =. coalesce dxs * sin_diffs
     c_n_sum =. coalesce dys * cos_diffs
     d_n_sum =. coalesce dys * sin_diffs
+
     NB. I feel like there's a better way to do this
     NB. also maybe boxed return? -> with T?
     (a_n_sum , b_n_sum , c_n_sum , ,: d_n_sum)
