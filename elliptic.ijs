@@ -18,7 +18,7 @@ cos =: 2 & o.
 
 tie_self =: ] , {.
 
-length_step =: t &: tie_self
+t_step =: t &: (0, tie_self)
 
 NB. for debugging lol
 print_debug =: monad : 'y (1!:2) 2'
@@ -27,7 +27,8 @@ coeff =: 4 : 0
     'xs ys' =. x
     n =: y
     K =. # xs
-    ts =. (0 , xs , {. xs) t (0, ys, {. ys)
+    NB. correct?
+    ts =. xs t_step ys
     NB. tie at both (so we have t0 and tK equally
     T =: {: ts
     outer_coeff =. T % (2 * (*: n) * (*: pi))
