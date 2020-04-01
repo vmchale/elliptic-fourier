@@ -30,13 +30,15 @@ offset =: 4 : 0
     partial_xs =. +/\ delta_xs
     partial_ys =. +/\ delta_ys
     partial_ts =. +/\ delta_ts
-    print_debug partial_xs
     NB. check indexing
     xi =. partial_xs - (delta_xs % delta_ts) * partial_ts
     delta =. partial_ys - (delta_ys % delta_ts) * partial_ts
-    ts =. x t_step ys
+    ts =. x t_step y
+    delta_tsq =: succ_diff ((^ & 2) t)
     T =: {: x t_step y
-    xi;delta
+    A =: %T * +/ (delta_xs % (2 * delta_ts) + xi * (succ_diff ts))
+    C =: %T * +/ (delta_ys % (2 * delta_ts) + delta * (succ_diff ts))
+    A;C
 )
 
 coeff =: 4 : 0
