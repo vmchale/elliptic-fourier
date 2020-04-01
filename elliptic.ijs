@@ -1,6 +1,6 @@
 NB. http://www.sci.utah.edu/~gerig/CS7960-S2010/handouts/Kuhl-Giardina-CGIP1982.pdf
 
-dist =: dyad : '%: ((*: x) + (*: y))'
+dist =: %: @: + &: *:
 
 NB. helper adverb for successive difference, quotient
 NB. https://rosettacode.org/wiki/Successive_prime_differences#J
