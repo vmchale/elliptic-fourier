@@ -8,7 +8,7 @@ sap =: 1 : '2 u ~/\ ]'
 
 succ_diff =: - sap
 
-delta_t =: dyad : '(succ_diff x) dist (succ_diff y)'
+delta_t =: dist &: succ_diff
 
 t =: dyad : '+/\ | (x delta_t y)'
 pi =: o. 1
@@ -18,7 +18,7 @@ cos =: 2 & o.
 
 tie_self =: ] , {.
 
-length_step =: dyad : '(tie_self x) t (tie_self y)'
+length_step =: t &: tie_self
 
 NB. for debugging lol
 print_debug =: monad : 'y (1!:2) 2'
