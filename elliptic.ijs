@@ -36,11 +36,12 @@ coeff =: 4 : 0
     delta_ys =. succ_diff tie_self ys
     delta_ts =. delta_xs dist delta_ys
 
-    u =. 4 : 'cos (2 * n * pi * x % T) - cos (2 * n * pi * y % T)'
-    v =. 4 : 'sin (2 * n * pi * x % T) - sin (2 * n * pi * y % T)'
+    scale_rad =: (*& (2*n*pi%T))
+    cos_diff =. -&: (cos @ scale_rad)
+    sin_diff =. -&: (sin @ scale_rad)
 
-    cos_diffs =. u sap ts
-    sin_diffs =. v sap ts
+    cos_diffs =. cos_diff sap ts
+    sin_diffs =. sin_diff sap ts
     dxs =. delta_xs % delta_ts
     dys =. delta_ys % delta_ts
     coalesce =. (outer_coeff & *) @: +/
