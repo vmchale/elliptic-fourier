@@ -23,10 +23,25 @@ t_step =: t &: (0, tie_self)
 NB. for debugging lol
 print_debug =: monad : 'y (1!:2) 2'
 
+offset =: 4 : 0
+    delta_xs =. succ_diff tie_self x
+    delta_ys =. succ_diff tie_self y
+    delta_ts =. delta_xs dist delta_ys
+    partial_xs =. +/\ delta_xs
+    partial_ys =. +/\ delta_ys
+    partial_ts =. +/\ delta_ts
+    print_debug partial_xs
+    NB. check indexing
+    xi =. partial_xs - (delta_xs % delta_ts) * partial_ts
+    delta =. partial_ys - (delta_ys % delta_ts) * partial_ts
+    ts =. x t_step ys
+    T =: {: x t_step y
+    xi;delta
+)
+
 coeff =: 4 : 0
     'xs ys' =. x
     n =: y
-    K =. # xs
     NB. correct?
     ts =. xs t_step ys
     NB. tie at both (so we have t0 and tK equally
