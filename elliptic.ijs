@@ -36,8 +36,8 @@ offset =: 4 : 0
     ts =. x t_step y
     delta_tsq =: succ_diff ((^ & 2) t)
     T =: {: x t_step y
-    A =: %T * +/ (delta_xs % (2 * delta_ts) + xi * (succ_diff ts))
-    C =: %T * +/ (delta_ys % (2 * delta_ts) + delta * (succ_diff ts))
+    A =: (%&T) +/ ((delta_xs % 2 * delta_ts) + xi * (succ_diff ts))
+    C =: (%&T) +/ ((delta_ys % 2 * delta_ts) + delta * (succ_diff ts))
     A;C
 )
 
