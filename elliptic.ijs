@@ -34,10 +34,10 @@ offset =: 4 : 0
     xi =. partial_xs - (delta_xs % delta_ts) * partial_ts
     delta =. partial_ys - (delta_ys % delta_ts) * partial_ts
     ts =. x t_step y
-    delta_tsq =: succ_diff (ts ^ 2)
-    T =: {: ts
-    A =: (%&T) +/ (((delta_xs % 2 * delta_ts) * delta_tsq) + xi * delta_ts)
-    C =: (%&T) +/ (((delta_ys % 2 * delta_ts) * delta_tsq) + delta * delta_ts)
+    delta_tsq =. succ_diff (ts ^ 2)
+    T =. {: ts
+    A =. (%&T) +/ (((delta_xs % 2 * delta_ts) * delta_tsq) + xi * delta_ts)
+    C =. (%&T) +/ (((delta_ys % 2 * delta_ts) * delta_tsq) + delta * delta_ts)
     NB. idk if this is right, but it's right as I understand it?
     NB. there may be a bug in the Python library...
     A;C
@@ -45,31 +45,33 @@ offset =: 4 : 0
 
 coeff =: 4 : 0
     'xs ys' =. x
-    n =: y
+    n =. y
     ts =. xs t_step ys
     NB. tie at both (so we have t0 and tK equally
-    T =: {: ts
+    T =. {: ts
     outer_coeff =. T % (2 * (*: n) * (*: pi))
     delta =. succ_diff @: tie_self
     delta_xs =. delta xs
     delta_ys =. delta ys
     delta_ts =. delta_xs dist delta_ys
 
-    scale_rad =: (*& (2*n*pi%T))
+    scale_rad =. (*& (2*n*pi%T))
+
     cos_diff =. -&: (cos @ scale_rad)
     sin_diff =. -&: (sin @ scale_rad)
 
     cos_diffs =. cos_diff sap ts
     sin_diffs =. sin_diff sap ts
+
     dxs =. delta_xs % delta_ts
-    print_debug (+/ dxs * cos_diffs)
-    print_debug outer_coeff * (+/ dxs * cos_diffs)
     dys =. delta_ys % delta_ts
 
-    a_n_sum =. outer_coeff * (+/ dxs * cos_diffs)
-    b_n_sum =. outer_coeff * (+/ dxs * sin_diffs)
-    c_n_sum =. outer_coeff * (+/ dys * cos_diffs)
-    d_n_sum =. outer_coeff * (+/ dys * sin_diffs)
+    coalesce =. outer_coeff & * @: (+/)
+
+    a_n_sum =. coalesce dxs * cos_diffs
+    b_n_sum =. coalesce dxs * sin_diffs
+    c_n_sum =. coalesce dys * cos_diffs
+    d_n_sum =. coalesce dys * sin_diffs
 
     (a_n_sum , b_n_sum , c_n_sum ,: d_n_sum)
 )
