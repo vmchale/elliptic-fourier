@@ -23,6 +23,8 @@ t_step =: t &: (0, tie_self)
 NB. for debugging lol
 print_debug =: monad : 'y (1!:2) 2'
 
+T =: {: @: t_step
+
 offset =: 4 : 0
     delta_xs =. succ_diff tie_self x
     delta_ys =. succ_diff tie_self y
@@ -76,6 +78,18 @@ coeff =: 4 : 0
     d_n_sum =. coalesce dys * sin_diffs
 
     (a_n_sum , b_n_sum , c_n_sum ,: d_n_sum)
+)
+
+reconstitute =: 2 : 0
+    'T a_n b_n c_n d_n' =. u
+    rot =. 2 * v * pi % T
+    N =. #a_n
+    ix =. >:i.N
+    coss =. cos (rot * ix)
+    sins =. sin (rot * ix)
+    X_n =. (+/ (a_n * coss)) + (+/ (b_n * sins))
+    Y_n =. (+/ (c_n * coss)) + (+/ (d_n * sins))
+    (X_n;Y_n)
 )
 
 NB. first n coefficients (in a 4x_ array)
