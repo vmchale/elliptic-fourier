@@ -27,19 +27,21 @@ offset =: 4 : 0
     delta_xs =. succ_diff tie_self x
     delta_ys =. succ_diff tie_self y
     delta_ts =. delta_xs dist delta_ys
+
     partial_xs =. +/\ delta_xs
     partial_ys =. +/\ delta_ys
     partial_ts =. +/\ delta_ts
-    NB. check indexing
+
     xi =. partial_xs - (delta_xs % delta_ts) * partial_ts
     delta =. partial_ys - (delta_ys % delta_ts) * partial_ts
+
     ts =. x t_step y
     delta_tsq =. succ_diff (ts ^ 2)
+
     T =. {: ts
     A =. (%&T) +/ (((delta_xs % 2 * delta_ts) * delta_tsq) + xi * delta_ts)
     C =. (%&T) +/ (((delta_ys % 2 * delta_ts) * delta_tsq) + delta * delta_ts)
-    NB. idk if this is right, but it's right as I understand it?
-    NB. there may be a bug in the Python library...
+
     A;C
 )
 
@@ -84,4 +86,3 @@ xs_pythagorean_triangle =: 0 4 4
 ys_pythagorean_triangle =: 0 0 3
 
 NB. need X_n function
-NB. also common bits
