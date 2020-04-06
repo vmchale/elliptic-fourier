@@ -92,8 +92,9 @@ reconstitute =: conjunction : 0
     X_n,Y_n
 )
 
+NB. missing a factor of two somewhere?
 radians =: 3 : 0
-    coeff =. 2 * pi % y
+    coeff =. 4 * pi % y
     coeff * (i.y)
 )
 
