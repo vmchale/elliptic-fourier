@@ -2,7 +2,6 @@ NB. http://www.sci.utah.edu/~gerig/CS7960-S2010/handouts/Kuhl-Giardina-CGIP1982.
 
 dist =: %: @: + &: *:
 
-NB. helper adverb for successive difference, quotient
 NB. https://rosettacode.org/wiki/Successive_prime_differences#J
 sap =: 1 : '2 u ~/\ ]'
 
@@ -19,9 +18,6 @@ cos =: 2 & o.
 tie_self =: ] , {.
 
 t_step =: t &: (0, tie_self)
-
-NB. for debugging lol
-print_debug =: monad : 'y (1!:2) 2'
 
 T =: {: @: t_step
 
