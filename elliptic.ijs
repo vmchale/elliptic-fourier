@@ -80,7 +80,7 @@ coeff =: 4 : 0
     (a_n_sum , b_n_sum , c_n_sum ,: d_n_sum)
 )
 
-reconstitute =: 2 : 0
+reconstitute =: conjunction : 0
     'T a_n b_n c_n d_n' =. u
     rot =. 2 * v * pi % T
     N =. #a_n
@@ -89,14 +89,14 @@ reconstitute =: 2 : 0
     sins =. sin (rot * ix)
     X_n =. (+/ (a_n * coss)) + (+/ (b_n * sins))
     Y_n =. (+/ (c_n * coss)) + (+/ (d_n * sins))
-    (X_n;Y_n)
+    X_n,Y_n
+)
+
+radians =: 3 : 0
+    coeff =. 2 * pi % y
+    coeff * (i.y)
 )
 
 NB. first n coefficients (in a 4x_ array)
-coeffs =: 4 : '|: (((x & coeff) " 0) (>: i.y))'
+coeffs =: 4 : '{. |: (((x & coeff) " 0) (>: i.y))'
 box_coeffs =: <"1 @ coeffs
-
-xs_pythagorean_triangle =: 0 4 4
-ys_pythagorean_triangle =: 0 0 3
-
-NB. need X_n function
