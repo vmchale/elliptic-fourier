@@ -5,6 +5,7 @@
 - [ ] Locales and whatnot
 # Invariants
 - [ ] I_k J_k K_ij https://sci-hub.si/https://www.sciencedirect.com/science/article/abs/pii/003132038790080X
+- [ ] `det =: -/ .*`
 # Applications
 - [ ] "shape distance" https://europepmc.org/article/med/8897210
 # Machine Learning
