@@ -16,5 +16,5 @@ DEPENDS =: ''
 
 FILES =: 0 : 0
 manifest.ijs
-elliptic-fourier.ijs
+elliptic.ijs
 )
