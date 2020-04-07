@@ -1,6 +1,6 @@
 # elliptic-fourier
 
-Elliptic Fourier series in Futhark. This is used for
+Elliptic Fourier series in J. This is used for
 approximating/characterizing contours of polygons.
 
 ## Use
