@@ -12,6 +12,8 @@ delta_t =: dist &: succ_diff
 t =: dyad : '+/\ | (x delta_t y)'
 pi =: o. 1
 
+det =: -/ .*
+
 sin =: 1 & o.
 cos =: 2 & o.
 
@@ -106,6 +108,11 @@ plot_ef =: dyad : 0
     'A C' =. x
     ((A&+)@(0&{) ; (C&+)@(1&{)) y
 )
+
+NB. Invariants of Lin and Hwang, see https://www.sciencedirect.com/science/article/abs/pii/003132038790080X
+NB. monad taking results off coeffs as an argument
+J =: det " 1 @ |:
+I =: (+/ @: *:) " 1 @ |:
 
 NB. first n coefficients (in a 4x_ array)
 NB. left argument: (xs;ys) where xs, ys arrays containing coordinates, right argument n (the number of fourier coefficients to retunr)
