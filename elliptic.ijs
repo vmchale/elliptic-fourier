@@ -19,8 +19,10 @@ tie_self =: ] , {.
 
 t_step =: t &: (0, tie_self)
 
+NB. perimeter of a polygon (period in our case)
 T =: {: @: t_step
 
+NB. left argument an array containing the x coordinates, right argument an array containing the y coordinates
 offset =: 4 : 0
     delta_xs =. succ_diff tie_self x
     delta_ys =. succ_diff tie_self y
@@ -76,9 +78,10 @@ coeff =: 4 : 0
     (a_n_sum , b_n_sum , c_n_sum ,: d_n_sum)
 )
 
-reconstitute =: conjunction : 0
-    'T a_n b_n c_n d_n' =. u
-    rot =. 2 * v * pi % T
+NB. left argument (T;coeffs) where coeffs is the result of box_coeffs and T is the period (perimeter)
+reconstitute =: dyad : 0
+    'T a_n b_n c_n d_n' =. x
+    rot =. 2 * y * pi % T
     N =. #a_n
     ix =. >:i.N
     coss =. cos (rot * ix)
@@ -94,6 +97,17 @@ radians =: 3 : 0
     coeff * (i.y)
 )
 
+NB. left argument T right arugment result of box_coeffs
+circularize =: dyad : '|: ((x;y) & reconstitute) " 0 radians 140'
+
+NB. helper function to plot results of circularize
+NB. Left argument (A,C) offset
+plot_ef =: dyad : 0
+    'A C' =. x
+    ((A&+)@(0&{) ; (C&+)@(1&{)) y
+)
+
 NB. first n coefficients (in a 4x_ array)
+NB. left argument: (xs;ys) where xs, ys arrays containing coordinates, right argument n (the number of fourier coefficients to retunr)
 coeffs =: 4 : '{. |: (((x & coeff) " 0) (>: i.y))'
 box_coeffs =: <"1 @ coeffs
