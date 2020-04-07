@@ -110,7 +110,7 @@ plot_ef =: dyad : 0
 )
 
 NB. Invariants of Lin and Hwang, see https://www.sciencedirect.com/science/article/abs/pii/003132038790080X
-NB. monad taking results off coeffs as an argument
+NB. monads taking results of coeffs (a 4xN array) as an argument
 J =: det " 1 @ |:
 I =: (+/ @: *:) " 1 @ |:
 
