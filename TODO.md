@@ -1,5 +1,8 @@
 - [ ] https://www.biorxiv.org/content/10.1101/131730v1.full.pdf
 - [x] Plot it
+# Performance
+- [ ] At least measure some stuff?
+- [ ] Use the debugging tool
 # Packaging
 - [x] https://github.com/jsoftware/tables_csv/blob/master/manifest.ijs
 - [ ] Locales and whatnot
