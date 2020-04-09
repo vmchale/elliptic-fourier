@@ -111,8 +111,9 @@ plot_ef =: dyad : 0
 
 NB. Invariants of Lin and Hwang, see https://www.sciencedirect.com/science/article/abs/pii/003132038790080X
 NB. monads taking results of coeffs (a 4xN array) as an argument
-J =: det " 1 @ |:
-I =: (+/ @: *:) " 1 @ |:
+with_coeffs =: adverb : 'u " 1 @ |:'
+J =: det with_coeffs
+I =: (+/ @: *:) with_coeffs
 
 NB. first n coefficients (in a 4x_ array)
 NB. left argument: (xs;ys) where xs, ys arrays containing coordinates, right argument n (the number of fourier coefficients to retunr)
