@@ -6,6 +6,8 @@
 # Packaging
 - [x] https://github.com/jsoftware/tables_csv/blob/master/manifest.ijs
 - [ ] Locales and whatnot
+# Documentation
+- [ ] joxygen
 # Invariants
 - [ ] K_ij https://sci-hub.si/https://www.sciencedirect.com/science/article/abs/pii/003132038790080X
 # Applications
