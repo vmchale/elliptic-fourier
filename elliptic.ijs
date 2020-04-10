@@ -10,7 +10,7 @@ succ_diff =: - sap
 delta_t =: dist &: succ_diff
 
 t =: dyad : '+/\ | (x delta_t y)'
-pi =: o. 1
+pi =: 1p1
 
 det =: -/ .*
 
@@ -19,10 +19,11 @@ cos =: 2 & o.
 
 tie_self =: ] , {.
 
-t_step =: t &: (0, tie_self)
+t_step =: (0&,) @: t &: tie_self
 
-NB. perimeter of a polygon (period in our case)
 T =: {: @: t_step
+
+print_debug =: monad : 'y (1!:2) 2'
 
 NB. left argument an array containing the x coordinates, right argument an array containing the y coordinates
 offset =: 4 : 0
@@ -37,6 +38,7 @@ offset =: 4 : 0
     xi =. partial_xs - (delta_xs % delta_ts) * partial_ts
     delta =. partial_ys - (delta_ys % delta_ts) * partial_ts
 
+    NB. t_step is hinky?
     ts =. x t_step y
     delta_tsq =. succ_diff (ts ^ 2)
 
@@ -95,12 +97,12 @@ reconstitute =: dyad : 0
 
 NB. missing a factor somewhere?
 radians =: 3 : 0
-    coeff =. 6 * pi % y
+    coeff =. 4 * pi % y
     coeff * (i.y)
 )
 
 NB. left argument T right arugment result of box_coeffs
-circularize =: dyad : '|: ((x;y) & reconstitute) " 0 radians 140'
+circularize =: dyad : '|: ((x;y) & reconstitute) " 0 radians 200'
 
 NB. helper function to plot results of circularize
 NB. Left argument (A,C) offset
@@ -116,6 +118,6 @@ J =: det with_coeffs
 I =: (+/ @: *:) with_coeffs
 
 NB. first n coefficients (in a 4x_ array)
-NB. left argument: (xs;ys) where xs, ys arrays containing coordinates, right argument n (the number of fourier coefficients to retunr)
+NB. left argument: (xs;ys) where xs, ys arrays containing coordinates, right argument n (the number of fourier coefficients to return)
 coeffs =: 4 : '{. |: (((x & coeff) " 0) (>: i.y))'
 box_coeffs =: <"1 @ coeffs
