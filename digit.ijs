@@ -1,8 +1,12 @@
+load 'tables/csv'
 load 'elliptic.ijs'
 
+contour_table =: readcsv 'digit.csv'
+'xs ys' =: |: > makenum each (1 2 & {) " 1 }. contour_table
 
-xs =: 0 4 4
-ys =: 0 0 3
+NB. untie self
+xs =: }: xs
+ys =: }: ys
 
 coeff_arr =: (xs;ys) coeffs 15
 coeff =: (xs;ys) box_coeffs 15

@@ -93,9 +93,9 @@ reconstitute =: dyad : 0
     X_n,Y_n
 )
 
-NB. missing a factor of two somewhere?
+NB. missing a factor somewhere?
 radians =: 3 : 0
-    coeff =. 4 * pi % y
+    coeff =. 6 * pi % y
     coeff * (i.y)
 )
 
