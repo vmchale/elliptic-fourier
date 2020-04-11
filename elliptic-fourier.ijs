@@ -12,4 +12,4 @@ reconstitute_z_ =: reconstitute_elliptic_
 plot_ef_z_ =: plot_ef_elliptic_
 J_z_ =: J_elliptic_
 I_z_ =: I_elliptic_
-radians_z_ =: radians_elliptic_
+interval_z_ =: interval_elliptic_
