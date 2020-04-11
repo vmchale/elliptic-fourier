@@ -1,5 +1,5 @@
 load 'tables/csv'
-load 'elliptic.ijs'
+load 'elliptic-fourier.ijs'
 
 contour_table =: readcsv 'digit.csv'
 'xs ys' =: |: > makenum each (1 2 & {) " 1 }. contour_table

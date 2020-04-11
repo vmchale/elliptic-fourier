@@ -1,5 +1,4 @@
-load 'elliptic.ijs'
-
+load 'elliptic-fourier.ijs'
 
 xs =: 0 4 4
 ys =: 0 0 3
