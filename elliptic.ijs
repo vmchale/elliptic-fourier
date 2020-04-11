@@ -38,7 +38,6 @@ offset =: 4 : 0
     xi =. partial_xs - (delta_xs % delta_ts) * partial_ts
     delta =. partial_ys - (delta_ys % delta_ts) * partial_ts
 
-    NB. t_step is hinky?
     ts =. x t_step y
     delta_tsq =. succ_diff (ts ^ 2)
 
