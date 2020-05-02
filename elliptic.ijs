@@ -27,11 +27,6 @@ delta =: succ_diff @: tie_self
 
 print_debug =: monad : 'y (1!:2) 2'
 
-NB. common =: dyad : 0
-    NB. delta_xs =. delta x
-    NB. delta_ys =. delta y
-    NB. delta_ts =. delta_xs dist delta_ys
-
 NB. left argument an array containing the x coordinates, right argument an array containing the y coordinates
 offset =: 4 : 0
     delta_xs =. delta x
@@ -43,6 +38,7 @@ offset =: 4 : 0
     partial_ts =. +/\ delta_ts
 
     xi =. partial_xs - (delta_xs % delta_ts) * partial_ts
+    NB. compare pyefd?
     delta =. partial_ys - (delta_ys % delta_ts) * partial_ts
 
     ts =. x t_step y
@@ -52,7 +48,8 @@ offset =: 4 : 0
     A =. (%&T) +/ (((delta_xs % 2 * delta_ts) * delta_tsq) + xi * delta_ts)
     C =. (%&T) +/ (((delta_ys % 2 * delta_ts) * delta_tsq) + delta * delta_ts)
 
-    A;C
+    NB. as here: https://github.com/hbldh/pyefd/blob/master/pyefd.py#L164
+    (A+({.x));(C+({.y))
 )
 
 coeff =: 4 : 0
@@ -100,16 +97,19 @@ reconstitute =: dyad : 0
     X_n,Y_n
 )
 
+NB. left argument period T, right argument number of points
 interval =: 4 : 0
     coeff =. x % y
     coeff * (i.>:y)
 )
 
 NB. left argument T right arugment result of box_coeffs
+NB.
+NB. This uses 200 points to make the shape.
 circularize =: dyad : '|: ((x;y) & reconstitute) " 0 (x interval 200)'
 
 NB. helper function to plot results of circularize
-NB. Left argument (A,C) offset
+NB. Left argument (A;C) offset
 plot_ef =: dyad : 0
     'A C' =. x
     ((A&+)@(0&{) ; (C&+)@(1&{)) y
@@ -117,7 +117,7 @@ plot_ef =: dyad : 0
 
 with_coeffs =: adverb : 'u " 1 @ |:'
 NB. Invariants of Lin and Hwang, see https://www.sciencedirect.com/science/article/abs/pii/003132038790080X
-NB. monads taking results of coeffs (a 4xN array) as an argument
+NB. monads taking results of coeffs (a 4xN arry) as an argument
 J =: det with_coeffs
 I =: (+/ @: *:) with_coeffs
 
